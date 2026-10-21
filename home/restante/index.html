@@ -1,1 +1,275 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Home TiPCA - restante</title></head><body><p>Componente reservado para o corpo restante da Home. Substituir pelo HTML consolidado 02_home_restante_v1.0 antes da publicação no GitHub Pages.</p></body></html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TiPCA Lab — Laboratório de Tecnologias Integradas em Potência, Controle e Automação.">
+  <title>TiPCA Lab | Corpo da Home sem destaque PIC</title>
+  <style>
+    :root {
+      --primary: #563676;
+      --primary-dark: #342147;
+      --primary-soft: #f1ebf7;
+      --accent: #e9aa2b;
+      --accent-dark: #996912;
+      --ink: #20252b;
+      --muted: #5e6975;
+      --line: #dde3e9;
+      --surface: #ffffff;
+      --surface-alt: #f6f8fa;
+      --success: #17765c;
+      --shadow: 0 14px 35px rgba(31, 37, 43, .10);
+      --radius: 18px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--surface);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.62;
+    }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .container { width: min(calc(100% - 40px), var(--max)); margin-inline: auto; }
+    .section { padding: 84px 0; }
+    .section.alt { background: var(--surface-alt); }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-bottom: 12px; color: var(--primary); font-weight: 800;
+      text-transform: uppercase; letter-spacing: .09em; font-size: .77rem;
+    }
+    .kicker::before { content: ""; width: 28px; height: 3px; background: var(--accent); border-radius: 3px; }
+    h1, h2, h3 { line-height: 1.16; margin-top: 0; }
+    h1 { font-size: clamp(2.45rem, 6vw, 5.5rem); letter-spacing: -.055em; margin-bottom: 20px; }
+    h2 { font-size: clamp(1.9rem, 3.4vw, 3rem); letter-spacing: -.035em; margin-bottom: 18px; }
+    h3 { font-size: 1.22rem; }
+    p { margin: 0 0 18px; }
+    .lead { max-width: 760px; color: var(--muted); font-size: 1.08rem; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 38px; }
+    .section-head p { max-width: 660px; color: var(--muted); margin-bottom: 0; }
+
+    .skip-link { position: absolute; left: -999px; top: 0; background: #fff; padding: 10px; z-index: 100; }
+    .skip-link:focus { left: 10px; top: 10px; }
+
+    .highlight-wrap { margin-top: 0; padding-top: 24px; position: relative; z-index: 1; }
+    .highlight {
+      padding: 30px; border-radius: var(--radius); color: white;
+      background: linear-gradient(120deg, #6c3a89, #49225e);
+      box-shadow: var(--shadow); display:block;
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    .badge { display:inline-flex; align-items:center; gap:8px; color:#1e2e27; background:#dff6eb; padding:7px 10px; border-radius:999px; font-size:.72rem; font-weight:900; letter-spacing:.065em; text-transform:uppercase; }
+    .badge .dot { width:8px; height:8px; border-radius:50%; background:var(--success); }
+
+    .more-info { text-transform:none; display:inline-block; margin-top:8px; color:#f3cf72; font-weight:900; font-size:.95rem; letter-spacing:.025em; text-decoration:none; }
+    .more-info:link, .more-info:visited { color:#f3cf72; text-decoration:none; }
+    .more-info:hover, .more-info:focus-visible { color:#ffffff; text-decoration:underline; text-underline-offset:4px; outline:none; }
+    .highlight h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); margin: 14px 0 8px; }
+    .highlight p { color:#eee6f3; margin:0; }
+    .deadline { margin-top: 12px; color:#f7d989; font-weight:800; }
+    .highlight .actions { margin:0; justify-content:flex-end; }
+
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:25px; }
+    .info-card { border:1px solid var(--line); background:#fff; border-radius:var(--radius); padding:32px; box-shadow: 0 8px 25px rgba(31,37,43,.055); }
+    .info-card h2 { font-size:1.8rem; }
+    .info-card p { color:var(--muted); }
+    .line-name { display:block; border-left:4px solid var(--accent); padding-left:16px; color:var(--primary-dark); font-weight:850; font-size:1.08rem; margin:18px 0; }
+    .text-link { color:var(--primary); font-weight:850; text-decoration-thickness:2px; text-underline-offset:4px; }
+
+    .project-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .project-card { min-height:295px; padding:26px; border:1px solid var(--line); background:#fff; border-radius:16px; display:flex; flex-direction:column; position:relative; overflow:hidden; transition:.22s ease; }
+    .project-card::before { content:""; position:absolute; width:110px; height:110px; border-radius:50%; background:var(--primary-soft); top:-46px; right:-42px; }
+    .project-card:hover { transform:translateY(-5px); border-color:#cdbddc; box-shadow:var(--shadow); }
+    .project-icon { width:48px; height:48px; border-radius:13px; display:grid; place-items:center; color:white; background:linear-gradient(135deg,var(--primary),var(--primary-dark)); font-size:1.35rem; margin-bottom:24px; }
+    .project-card h3 { margin-bottom:10px; color:var(--primary-dark); }
+    .project-card p { color:var(--muted); font-size:.94rem; flex:1; }
+    .project-card a { color:var(--primary); font-weight:850; text-decoration:none; }
+
+    .pic-band { display:grid; grid-template-columns:.85fr 1.15fr; border-radius:22px; overflow:hidden; background:var(--primary-dark); color:white; }
+    .pic-visual { min-height:360px; position:relative; background: linear-gradient(145deg, #704c90, #3c2650); display:grid; place-items:center; overflow:hidden; }
+    .pic-visual::before { content:""; position:absolute; width:260px; height:260px; border:35px solid rgba(255,255,255,.09); transform:rotate(29deg); border-radius:50px; }
+    .pic-symbol { position:relative; font-size:5rem; filter:grayscale(1) brightness(7); opacity:.92; }
+    .pic-copy { padding:46px; align-self:center; }
+    .pic-copy p { color:#e4dce9; }
+
+    .updates-grid { display:grid; grid-template-columns:1.35fr .65fr; gap:24px; }
+    .news-card, .agenda-panel { background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:30px; }
+    .news-meta { color:var(--primary); font-weight:800; font-size:.78rem; text-transform:uppercase; letter-spacing:.07em; }
+    .news-card h3 { font-size:1.65rem; margin:10px 0 12px; }
+    .news-card p { color:var(--muted); }
+    .agenda-list { list-style:none; margin:0; padding:0; }
+    .agenda-item { display:grid; grid-template-columns:66px 1fr; gap:15px; padding:20px 0; border-top:1px solid var(--line); }
+    .agenda-item:first-child { border-top:0; padding-top:5px; }
+    .date-box { border-radius:12px; padding:10px 5px; background:var(--primary-soft); color:var(--primary); text-align:center; line-height:1.05; font-weight:900; }
+    .date-box strong { display:block; font-size:1.55rem; }
+    .date-box span { font-size:.72rem; }
+    .agenda-copy h3 { margin:0 0 4px; font-size:1rem; }
+    .agenda-copy p { margin:0; color:var(--muted); font-size:.85rem; }
+
+    .feature-row { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    .feature-box { border-radius:var(--radius); padding:34px; border:1px solid var(--line); background:#fff; }
+    .feature-box.accented { background:linear-gradient(145deg,var(--primary-soft),#fff); }
+    .feature-box p { color:var(--muted); }
+    .resource-pill { display:inline-flex; gap:8px; align-items:center; padding:8px 11px; border-radius:999px; background:#eef3f7; color:#39434d; font-weight:800; font-size:.78rem; margin-top:6px; }
+
+    .contact { color:white; background:linear-gradient(125deg,#21172d,#4f3268); }
+    .contact-grid { display:grid; grid-template-columns:1.35fr .65fr; gap:48px; align-items:end; }
+    .contact p { color:#e4dce9; }
+    .email { display:inline-block; margin-top:12px; color:#f7d989; font-size:clamp(1.35rem,3vw,2.2rem); font-weight:900; text-decoration:none; }
+    .footer-links { display:grid; grid-template-columns:1fr 1fr; gap:8px 15px; }
+    .footer-links a { color:#eee8f4; text-decoration:none; }
+    .footer-links a:hover { text-decoration:underline; }
+    .copyright { border-top:1px solid rgba(255,255,255,.18); margin-top:44px; padding-top:20px; color:#bfb4c7; font-size:.8rem; }
+
+    @media (max-width: 960px) {
+      .pic-band, .contact-grid { grid-template-columns:1fr; }
+      .highlight { grid-template-columns:1fr; }
+      .project-grid { grid-template-columns:repeat(2,1fr); }
+      .updates-grid { grid-template-columns:1fr; }
+    }
+    @media (max-width: 680px) {
+      .container { width:min(calc(100% - 28px),var(--max)); }
+      .section { padding:64px 0; }
+      .two-col, .project-grid, .feature-row { grid-template-columns:1fr; }
+      .section-head { display:block; }
+      .highlight-wrap { margin-top:0; padding-top:14px; }
+      .highlight { padding:23px; }
+      .pic-copy { padding:30px 24px; }
+      .pic-visual { min-height:220px; }
+      .actions .btn { width:100%; }
+      .info-card, .news-card, .agenda-panel, .feature-box { padding:24px; }
+      .footer-links { grid-template-columns:1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior:auto; }
+      *, *::before, *::after { transition:none !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Corpo da Home sem o destaque PIC, que será incorporado como bloco separado. -->
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+<main id="conteudo">
+<section class="section" id="sobre">
+      <div class="container two-col">
+        <article class="info-card">
+          <div class="kicker">Identidade</div>
+          <h2>Sobre o TiPCA</h2>
+          <p>O TiPCA é o Laboratório de Tecnologias Integradas em Potência, Controle e Automação. Suas atividades aproximam pesquisa científica, desenvolvimento de soluções tecnológicas e formação acadêmica em áreas relacionadas à Engenharia Elétrica e à Automação.</p>
+          <a class="text-link" href="https://sites.google.com/view/pesquisaeletrica/in%C3%ADcio/equipe">Conheça a equipe →</a>
+        </article>
+        <article class="info-card" id="pesquisa">
+          <div class="kicker">Estrutura científica</div>
+          <h2>Nossa pesquisa</h2>
+          <p>O laboratório possui uma única linha de pesquisa:</p>
+          <span class="line-name">Sistemas Elétricos, Automação, Controle e Tecnologias Inteligentes</span>
+          <p>Os diferentes temas técnicos e científicos são desenvolvidos por meio dos projetos vinculados a essa linha.</p>
+          <a class="text-link" href="https://sites.google.com/view/pesquisaeletrica/pesquisa/projetos-de-pesquisa">Conheça nossa pesquisa →</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section alt" id="projetos">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="kicker">Uma linha, diferentes projetos</div><h2>Projetos de pesquisa</h2></div>
+          <p>Conheça as pesquisas vinculadas à linha Sistemas Elétricos, Automação, Controle e Tecnologias Inteligentes. As páginas individuais reunirão objetivos, equipe, atividades, resultados e recursos públicos.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project-card"><div class="project-icon" aria-hidden="true">◫</div><h3>CLP em Plataforma Aberta</h3><p>Desenvolvimento de um kit de Controlador Lógico Programável de baixo custo com plataforma aberta para o ensino de Engenharia a distância.</p><a href="#pagina-projeto-clp">Conheça o projeto →</a></article>
+          <article class="project-card"><div class="project-icon" aria-hidden="true">◎</div><h3>Arquiteturas Ciber-Cognitivas</h3><p>Pesquisa em arquiteturas distribuídas que integram inteligência artificial, robótica de enxame, IoT de baixo consumo e dispositivos vestíveis.</p><a href="#pagina-projeto-ciber">Conheça o projeto →</a></article>
+          <article class="project-card"><div class="project-icon" aria-hidden="true">↯</div><h3>Conversores CC-CC</h3><p>Investigação de topologias de conversores CC-CC aplicadas a painéis solares.</p><a href="#pagina-projeto-conversores">Conheça o projeto →</a></article>
+          <article class="project-card"><div class="project-icon" aria-hidden="true">▦</div><h3>Hardware, PCBs e Protótipos</h3><p>Desenvolvimento de hardware, placas de circuito impresso e protótipos eletrônicos para aplicações em Engenharia Elétrica.</p><a href="#pagina-projeto-hardware">Conheça o projeto →</a></article>
+          <article class="project-card"><div class="project-icon" aria-hidden="true">◇</div><h3>Nanossatélite CubeSat</h3><p>Desenvolvimento de modelo de engenharia e de subsistema elétrico de potência para nanossatélite no padrão CubeSat.</p><a href="#pagina-projeto-cubesat">Conheça o projeto →</a></article>
+          <article class="project-card"><div class="project-icon" aria-hidden="true">⌁</div><h3>Redes Industriais</h3><p>Pesquisa em redes e sistemas de comunicação aplicados à automação industrial.</p><a href="#pagina-projeto-redes">Conheça o projeto →</a></article>
+        </div>
+        <div class="actions"><a class="btn ghost" href="https://sites.google.com/view/pesquisaeletrica/pesquisa/projetos-de-pesquisa">Ver todos os projetos</a></div>
+      </div>
+    </section>
+
+    <section class="section" id="pic">
+      <div class="container pic-band">
+        <div class="pic-visual" aria-hidden="true"><div class="pic-symbol">⌬</div></div>
+        <div class="pic-copy">
+          <div class="kicker" style="color:#f3cf72">Formação científica</div>
+          <h2>Iniciação Científica no TiPCA</h2>
+          <p>A Iniciação Científica permite que estudantes participem de projetos de pesquisa, desenvolvam atividades sob orientação docente e tenham contato com métodos, práticas e formas de comunicação científica.</p>
+          <p>As oportunidades são divulgadas conforme os editais institucionais do Programa de Iniciação Científica.</p>
+          <div class="actions">
+            <a class="btn primary" href="https://sites.google.com/view/pesquisaeletrica/pesquisa/inicia%C3%A7%C3%A3o-cient%C3%ADfica-pic">VER INFORMAÇÕES DO PIC</a>
+            <a class="btn secondary" href="https://sites.google.com/view/pesquisaeletrica/pesquisa/inicia%C3%A7%C3%A3o-cient%C3%ADfica-pic">INSCREVA-SE NO PIC 2027</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="acontece">
+      <div class="container">
+        <div class="section-head"><div><div class="kicker">Atualidade</div><h2>Acontece no TiPCA</h2></div><p>Notícias registram acontecimentos. A agenda reúne datas objetivas e próximas ações.</p></div>
+        <div class="updates-grid">
+          <article class="news-card">
+            <div class="news-meta">Última notícia · PIC</div>
+            <h3>PIC 2027: inscrições abertas para projetos de Iniciação Científica</h3>
+            <p>Está aberto o processo seletivo para o Programa de Iniciação Científica 2027. Estudantes interessados podem conhecer os projetos vinculados ao TiPCA, consultar o edital e acessar as informações para participação.</p>
+            <a class="text-link" href="#pagina-noticia-pic-2027">Leia a notícia →</a>
+          </article>
+          <aside class="agenda-panel" aria-labelledby="agenda-title">
+            <div class="kicker">Próximas datas</div>
+            <h2 id="agenda-title" style="font-size:1.65rem">Agenda</h2>
+            <ul class="agenda-list">
+              <li class="agenda-item"><div class="date-box"><strong>09</strong><span>NOV</span></div><div class="agenda-copy"><h3>Encerramento das inscrições</h3><p>PIC 2027</p></div></li>
+              <li class="agenda-item"><div class="date-box"><strong>18</strong><span>DEZ</span></div><div class="agenda-copy"><h3>Divulgação do resultado</h3><p>PIC 2027</p></div></li>
+            </ul>
+            <div class="actions"><a class="btn ghost" href="https://sites.google.com/view/pesquisaeletrica/eventos" target="_blank" rel="noopener noreferrer">VER AGENDA COMPLETA →</a></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container feature-row">
+        <article class="feature-box accented">
+          <div class="kicker">Resultados</div>
+          <h2>Produção científica</h2>
+          <p>Conheça a produção científica desenvolvida no âmbito dos projetos do TiPCA, incluindo artigos, trabalhos apresentados em eventos e outros resultados das atividades de pesquisa.</p>
+          <a class="btn ghost" href="https://sites.google.com/view/pesquisaeletrica/pesquisa/produ%C3%A7%C3%A3o-cient%C3%ADfica">Acessar produção científica</a>
+        </article>
+        <article class="feature-box" id="recursos">
+          <div class="kicker">Conhecimento aberto</div>
+          <h2>Recursos técnicos</h2>
+          <p>Acesse códigos, documentação e outros materiais técnicos disponibilizados publicamente no âmbito dos projetos.</p>
+          <span class="resource-pill">Recurso disponível: projeto CLP</span>
+          <div class="actions"><a class="btn ghost" href="https://github.com/mariaalineg/CLP">Acessar repositório do CLP</a></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="contact" id="contato">
+    <div class="container section">
+      <div class="contact-grid">
+        <div>
+          <div class="kicker" style="color:#f3cf72">Contato</div>
+          <h2>TiPCA Lab</h2>
+          <p>Laboratório de Tecnologias Integradas em Potência, Controle e Automação<br>Escola Superior Politécnica</p>
+          <a class="email" href="mailto:tipca@uninter.com">tipca@uninter.com</a>
+        </div>
+        <nav class="footer-links" aria-label="Links do rodapé">
+          <a href="https://sites.google.com/view/pesquisaeletrica/in%C3%ADcio/equipe">Equipe</a>
+          <a href="https://sites.google.com/view/pesquisaeletrica/pesquisa/projetos-de-pesquisa">Projetos</a>
+          <a href="https://sites.google.com/view/pesquisaeletrica/pesquisa/produ%C3%A7%C3%A3o-cient%C3%ADfica">Produção científica</a>
+          <a href="#recursos">Recursos</a>
+          <a href="https://sites.google.com/view/pesquisaeletrica/extens%C3%A3o-efici%C3%AAncia-energ%C3%A9tica">Extensão</a>
+          <a href="mailto:tipca@uninter.com">Contato</a>
+        </nav>
+      </div>
+      <div class="copyright">TiPCA Lab · Laboratório de Tecnologias Integradas em Potência, Controle e Automação.</div>
+    </div>
+  </footer>
+</body>
+</html>
