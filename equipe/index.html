@@ -1,456 +1,61 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Equipe | TiPCA Lab</title>
-  <meta name="description" content="Pesquisadores, estudantes de iniciação científica e egressos do TiPCA Lab.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --purple: #5b3a7d;
-      --purple-dark: #3b2354;
-      --purple-soft: #f2ecf7;
-      --gold: #ffd166;
-      --ink: #28313b;
-      --muted: #64748b;
-      --line: #e2e8f0;
-      --surface: #ffffff;
-      --background: #f8f9fa;
-      --shadow: 0 8px 24px rgba(67,39,89,.10);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.6;
-      color: var(--ink);
-      background: var(--background);
-    }
-
-    a { color: inherit; }
-
-    .container {
-      width: min(100% - 32px, 1040px);
-      margin: 0 auto;
-      padding: 36px 0 60px;
-    }
-
-    .page-header {
-      border-bottom: 2px solid var(--purple);
-      padding-bottom: 18px;
-      margin-bottom: 34px;
-    }
-
-    .eyebrow {
-      color: var(--purple);
-      font-size: .76rem;
-      font-weight: 800;
-      letter-spacing: .09em;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
-
-    .page-title {
-      font-family: 'Montserrat', sans-serif;
-      color: var(--purple);
-      font-size: clamp(1.95rem, 4vw, 2.7rem);
-      line-height: 1.15;
-      margin-bottom: 9px;
-    }
-
-    .page-subtitle {
-      color: var(--muted);
-      max-width: 800px;
-      font-size: 1.04rem;
-    }
-
-    .section { margin-top: 44px; }
-
-    .section-header { margin-bottom: 20px; }
-
-    .section-title {
-      font-family: 'Montserrat', sans-serif;
-      color: var(--purple);
-      font-size: 1.4rem;
-      margin-bottom: 6px;
-    }
-
-    .section-description {
-      color: var(--muted);
-      max-width: 820px;
-      font-size: .94rem;
-    }
-
-    /* Pesquisadores */
-    .researchers-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .researcher-card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 22px;
-      display: grid;
-      grid-template-columns: 58px 1fr;
-      gap: 16px;
-      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-    }
-
-    .researcher-card:hover {
-      transform: translateY(-2px);
-      border-color: #c7b2d7;
-      box-shadow: var(--shadow);
-    }
-
-    .avatar {
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, var(--purple), #7b56a0);
-      color: #fff;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: .95rem;
-    }
-
-    .researcher-name {
-      font-family: 'Montserrat', sans-serif;
-      color: var(--purple-dark);
-      font-size: 1.02rem;
-      line-height: 1.35;
-      margin-bottom: 5px;
-    }
-
-    .researcher-meta {
-      color: var(--muted);
-      font-size: .86rem;
-      margin-bottom: 14px;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 36px;
-      padding: 8px 12px;
-      border-radius: 7px;
-      text-decoration: none;
-      font-size: .8rem;
-      font-weight: 750;
-      transition: background .18s ease, color .18s ease, transform .18s ease;
-    }
-
-    .button-primary { background: var(--purple); color: #fff; }
-    .button-secondary { border: 1px solid var(--purple); color: var(--purple); background: #fff; }
-    .button:hover, .button:focus-visible { transform: translateY(-1px); outline: none; }
-    .button-primary:hover { background: var(--purple-dark); }
-    .button-secondary:hover { background: var(--purple-soft); }
-
-    /* Projetos e estudantes */
-    .project-group {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 18px;
-    }
-
-    .project-heading {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 16px;
-      padding-bottom: 15px;
-      margin-bottom: 16px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .project-heading h3 {
-      font-family: 'Montserrat', sans-serif;
-      color: var(--purple);
-      font-size: 1.08rem;
-    }
-
-    .project-link {
-      color: var(--purple);
-      font-size: .82rem;
-      font-weight: 800;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .people-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .person-card {
-      background: #fbfbfc;
-      border: 1px solid #edf0f3;
-      border-radius: 9px;
-      padding: 16px;
-    }
-
-    .person-name {
-      font-weight: 750;
-      color: var(--ink);
-      line-height: 1.35;
-      margin-bottom: 5px;
-    }
-
-    .person-course,
-    .person-location,
-    .person-period {
-      color: var(--muted);
-      font-size: .83rem;
-    }
-
-    .person-location { margin-top: 2px; }
-
-    .person-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 11px;
-    }
-
-    .year-badge {
-      display: inline-block;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: var(--purple-soft);
-      color: var(--purple);
-      font-size: .72rem;
-      font-weight: 750;
-    }
-
-    .lattes-link {
-      color: var(--purple);
-      font-size: .78rem;
-      font-weight: 800;
-      text-decoration: none;
-    }
-
-    .distance-note {
-      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
-      color: #fff;
-      border-radius: 12px;
-      padding: 22px 24px;
-      margin-bottom: 22px;
-    }
-
-    .distance-note strong {
-      display: block;
-      color: var(--gold);
-      margin-bottom: 5px;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .distance-note p { color: #eee7f3; font-size: .9rem; }
-
-    .note {
-      margin-top: 26px;
-      color: var(--muted);
-      font-size: .82rem;
-      text-align: center;
-    }
-
-    @media (max-width: 760px) {
-      .researchers-grid,
-      .people-grid { grid-template-columns: 1fr; }
-      .project-heading { align-items: flex-start; flex-direction: column; }
-    }
-
-    @media (max-width: 480px) {
-      .container { width: min(100% - 24px, 1040px); padding-top: 24px; }
-      .researcher-card { grid-template-columns: 50px 1fr; padding: 18px; }
-      .avatar { width: 50px; height: 50px; }
-      .project-group { padding: 19px; }
-      .actions { flex-direction: column; align-items: stretch; }
-      .button { width: 100%; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Equipe | TiPCA Lab</title>
+<meta name="description" content="Pesquisadores, estudantes de iniciação científica e egressos do TiPCA Lab.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--p:#5b3a7d;--pd:#3b2354;--ps:#f2ecf7;--gold:#ffd166;--ink:#28313b;--muted:#64748b;--line:#e2e8f0;--surface:#fff;--bg:#f8f9fa;--shadow:0 8px 24px rgba(67,39,89,.10)}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.6;color:var(--ink);background:var(--bg)}a{color:inherit}.container{width:min(100% - 32px,1040px);margin:auto;padding:36px 0 60px}.page-header{border-bottom:2px solid var(--p);padding-bottom:18px;margin-bottom:34px}.eyebrow{color:var(--p);font-size:.76rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;margin-bottom:5px}.page-title{font-family:Montserrat,sans-serif;color:var(--p);font-size:clamp(1.95rem,4vw,2.7rem);line-height:1.15;margin-bottom:9px}.page-subtitle{color:var(--muted);max-width:800px;font-size:1.04rem}.section{margin-top:44px}.section-header{margin-bottom:20px}.section-title{font-family:Montserrat,sans-serif;color:var(--p);font-size:1.4rem;margin-bottom:6px}.section-description{color:var(--muted);max-width:840px;font-size:.94rem}.researchers-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.researcher-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px;display:grid;grid-template-columns:58px 1fr;gap:16px;transition:.2s}.researcher-card:hover{transform:translateY(-2px);border-color:#c7b2d7;box-shadow:var(--shadow)}.avatar{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--p),#7b56a0);color:#fff;font-family:Montserrat,sans-serif;font-weight:700;font-size:.95rem}.researcher-name{font-family:Montserrat,sans-serif;color:var(--pd);font-size:1.02rem;line-height:1.35;margin-bottom:5px}.researcher-meta{color:var(--muted);font-size:.86rem;margin-bottom:12px}.external-badge{display:inline-block;margin-bottom:12px;padding:4px 9px;border-radius:999px;background:#fff3cf;color:#725200;font-size:.72rem;font-weight:800}.actions{display:flex;flex-wrap:wrap;gap:8px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:8px 12px;border-radius:7px;text-decoration:none;font-size:.8rem;font-weight:750;transition:.18s}.button-primary{background:var(--p);color:#fff}.button-secondary{border:1px solid var(--p);color:var(--p);background:#fff}.button:hover,.button:focus-visible{transform:translateY(-1px);outline:none}.button-primary:hover{background:var(--pd)}.button-secondary:hover{background:var(--ps)}.distance-note{background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;border-radius:12px;padding:22px 24px;margin-bottom:22px}.distance-note strong{display:block;color:var(--gold);margin-bottom:5px;font-family:Montserrat,sans-serif}.distance-note p{color:#eee7f3;font-size:.9rem}.project-group{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px;margin-bottom:18px}.project-heading{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-bottom:15px;margin-bottom:16px;border-bottom:1px solid var(--line)}.project-heading h3{font-family:Montserrat,sans-serif;color:var(--p);font-size:1.08rem}.project-link{color:var(--p);font-size:.82rem;font-weight:800;text-decoration:none;white-space:nowrap}.people-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.person-card{background:#fbfbfc;border:1px solid #edf0f3;border-radius:9px;padding:16px}.person-name{font-weight:750;line-height:1.35;margin-bottom:5px}.person-course,.person-location{color:var(--muted);font-size:.83rem}.person-location{margin-top:2px}.person-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:11px}.year-badge{display:inline-block;padding:4px 9px;border-radius:999px;background:var(--ps);color:var(--p);font-size:.72rem;font-weight:750}.lattes-link{color:var(--p);font-size:.78rem;font-weight:800;text-decoration:none}.note{margin-top:26px;color:var(--muted);font-size:.82rem;text-align:center}@media(max-width:760px){.researchers-grid,.people-grid{grid-template-columns:1fr}.project-heading{align-items:flex-start;flex-direction:column}}@media(max-width:480px){.container{width:min(100% - 24px,1040px);padding-top:24px}.researcher-card{grid-template-columns:50px 1fr;padding:18px}.avatar{width:50px;height:50px}.project-group{padding:19px}.actions{flex-direction:column}.button{width:100%}}
+</style>
 </head>
-<body>
-  <main class="container">
-    <header class="page-header">
-      <div class="eyebrow">TiPCA Lab</div>
-      <h1 class="page-title">Nossa equipe</h1>
-      <p class="page-subtitle">Pesquisadores, estudantes de Iniciação Científica e egressos que participam das atividades de pesquisa do Laboratório de Tecnologias Integradas em Potência, Controle e Automação.</p>
-    </header>
+<body><main class="container">
+<header class="page-header"><div class="eyebrow">TiPCA Lab</div><h1 class="page-title">Nossa equipe</h1><p class="page-subtitle">Pesquisadores, estudantes de Iniciação Científica e egressos que participam das atividades de pesquisa do Laboratório de Tecnologias Integradas em Potência, Controle e Automação.</p></header>
 
-    <section class="section" aria-labelledby="pesquisadores">
-      <div class="section-header">
-        <h2 class="section-title" id="pesquisadores">Pesquisadores</h2>
-        <p class="section-description">Integrantes da linha Sistemas Elétricos, Automação, Controle e Tecnologias Inteligentes.</p>
-      </div>
+<section class="section" aria-labelledby="pesquisadores"><div class="section-header"><h2 class="section-title" id="pesquisadores">Pesquisadores</h2><p class="section-description">Integrantes da linha Sistemas Elétricos, Automação, Controle e Tecnologias Inteligentes, apresentados em ordem alfabética.</p></div><div class="researchers-grid">
 
-      <div class="researchers-grid">
-        <article class="researcher-card">
-          <div class="avatar" aria-hidden="true">MA</div>
-          <div>
-            <h3 class="researcher-name">Maria Aline Gonçalves</h3>
-            <p class="researcher-meta">Pesquisadora · Doutorado</p>
-            <div class="actions">
-              <a class="button button-primary" href="https://mariaalineg.github.io/tipca-site/equipe/maria-aline/">Página pessoal</a>
-              <a class="button button-secondary" href="http://lattes.cnpq.br/9007743207262432" target="_blank" rel="noopener noreferrer">Currículo Lattes</a>
-            </div>
-          </div>
-        </article>
+<article class="researcher-card"><div class="avatar">AR</div><div><h3 class="researcher-name">Amilton Carlos Rattmann</h3><p class="researcher-meta">Pesquisador · Mestrado</p><div class="actions"><a class="button button-primary" href="https://mariaalineg.github.io/tipca-site/equipe/amilton/" target="_blank" rel="noopener noreferrer">Página pessoal</a><a class="button button-secondary" href="http://lattes.cnpq.br/0535981173134970" target="_blank" rel="noopener noreferrer">Currículo Lattes</a></div></div></article>
 
-        <article class="researcher-card">
-          <div class="avatar" aria-hidden="true">EC</div>
-          <div>
-            <h3 class="researcher-name">Eliane Silva Custódio</h3>
-            <p class="researcher-meta">Pesquisadora · Mestrado</p>
-            <div class="actions">
-              <a class="button button-primary" href="./eliane/">Página pessoal</a>
-              <a class="button button-secondary" href="http://lattes.cnpq.br/5276023018268961" target="_blank" rel="noopener noreferrer">Currículo Lattes</a>
-            </div>
-          </div>
-        </article>
+<article class="researcher-card"><div class="avatar">DV</div><div><h3 class="researcher-name">Denir Valencio de Campos</h3><p class="researcher-meta">Pesquisador · Mestrado</p><div class="actions"><a class="button button-primary" href="https://mariaalineg.github.io/tipca-site/equipe/denir/" target="_blank" rel="noopener noreferrer">Página pessoal</a></div></div></article>
 
-        <article class="researcher-card">
-          <div class="avatar" aria-hidden="true">JP</div>
-          <div>
-            <h3 class="researcher-name">Juliano de Mello Pedroso</h3>
-            <p class="researcher-meta">Pesquisador · Doutorado</p>
-            <div class="actions">
-              <a class="button button-primary" href="./juliano/">Página pessoal</a>
-              <a class="button button-secondary" href="http://lattes.cnpq.br/6132290691089761" target="_blank" rel="noopener noreferrer">Currículo Lattes</a>
-            </div>
-          </div>
-        </article>
+<article class="researcher-card"><div class="avatar">EC</div><div><h3 class="researcher-name">Eliane Silva Custódio</h3><p class="researcher-meta">Pesquisadora · Mestrado</p><div class="actions"><a class="button button-primary" href="https://mariaalineg.github.io/tipca-site/equipe/eliane/" target="_blank" rel="noopener noreferrer">Página pessoal</a><a class="button button-secondary" href="http://lattes.cnpq.br/5276023018268961" target="_blank" rel="noopener noreferrer">Currículo Lattes</a></div></div></article>
 
-        <article class="researcher-card">
-          <div class="avatar" aria-hidden="true">AR</div>
-          <div>
-            <h3 class="researcher-name">Amilton Carlos Rattmann</h3>
-            <p class="researcher-meta">Pesquisador · Mestrado</p>
-            <div class="actions">
-              <a class="button button-primary" href="./amilton/">Página pessoal</a>
-              <a class="button button-secondary" href="http://lattes.cnpq.br/0535981173134970" target="_blank" rel="noopener noreferrer">Currículo Lattes</a>
-            </div>
-          </div>
-        </article>
+<article class="researcher-card"><div class="avatar">JB</div><div><h3 class="researcher-name">José Manoel Balthazar</h3><p class="researcher-meta">Professor pesquisador</p><span class="external-badge">Pesquisador externo · Projeto CubeSat</span><div class="actions"><a class="button button-primary" href="https://ndccg.gitlab.io/docs/people/" target="_blank" rel="noopener noreferrer">Grupo de pesquisa</a></div></div></article>
 
-        <article class="researcher-card">
-          <div class="avatar" aria-hidden="true">DV</div>
-          <div>
-            <h3 class="researcher-name">Denir Valencio de Campos</h3>
-            <p class="researcher-meta">Pesquisador · Mestrado</p>
-            <div class="actions">
-              <a class="button button-primary" href="./denir/">Página pessoal</a>
-            </div>
-          </div>
-        </article>
+<article class="researcher-card"><div class="avatar">JP</div><div><h3 class="researcher-name">Juliano de Mello Pedroso</h3><p class="researcher-meta">Pesquisador · Doutorado</p><div class="actions"><a class="button button-primary" href="https://mariaalineg.github.io/tipca-site/equipe/juliano/" target="_blank" rel="noopener noreferrer">Página pessoal</a><a class="button button-secondary" href="http://lattes.cnpq.br/6132290691089761" target="_blank" rel="noopener noreferrer">Currículo Lattes</a></div></div></article>
 
-        <article class="researcher-card">
-          <div class="avatar" aria-hidden="true">TA</div>
-          <div>
-            <h3 class="researcher-name">Tayssa de Almeida Dominguez</h3>
-            <p class="researcher-meta">Pesquisadora · Mestrado</p>
-            <div class="actions">
-              <a class="button button-primary" href="./tayssa/">Página pessoal</a>
-            </div>
-          </div>
-        </article>
+<article class="researcher-card"><div class="avatar">MA</div><div><h3 class="researcher-name">Maria Aline Gonçalves</h3><p class="researcher-meta">Pesquisadora · Doutorado</p><div class="actions"><a class="button button-primary" href="https://mariaalineg.github.io/tipca-site/equipe/maria-aline/" target="_blank" rel="noopener noreferrer">Página pessoal</a><a class="button button-secondary" href="http://lattes.cnpq.br/9007743207262432" target="_blank" rel="noopener noreferrer">Currículo Lattes</a></div></div></article>
 
-        <article class="researcher-card">
-          <div class="avatar" aria-hidden="true">OT</div>
-          <div>
-            <h3 class="researcher-name">Osmar Tenorio Pereira Dias Junior</h3>
-            <p class="researcher-meta">Pesquisador · Mestrado</p>
-            <div class="actions">
-              <a class="button button-primary" href="./osmar/">Página pessoal</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
+<article class="researcher-card"><div class="avatar">OT</div><div><h3 class="researcher-name">Osmar Tenorio Pereira Dias Junior</h3><p class="researcher-meta">Pesquisador</p><div class="actions"><a class="button button-primary" href="https://mariaalineg.github.io/tipca-site/equipe/osmar/" target="_blank" rel="noopener noreferrer">Página pessoal</a></div></div></article>
 
-    <section class="section" aria-labelledby="estudantes">
-      <div class="section-header">
-        <h2 class="section-title" id="estudantes">Estudantes de Iniciação Científica</h2>
-        <p class="section-description">Participantes atuais, organizados por projeto de pesquisa.</p>
-      </div>
+<article class="researcher-card"><div class="avatar">TA</div><div><h3 class="researcher-name">Tayssa de Almeida Dominguez</h3><p class="researcher-meta">Pesquisadora · Mestrado</p><div class="actions"><a class="button button-primary" href="https://mariaalineg.github.io/tipca-site/equipe/tayssa/" target="_blank" rel="noopener noreferrer">Página pessoal</a></div></div></article>
+</div></section>
 
-      <div class="distance-note">
-        <strong>Pesquisa desenvolvida também a distância</strong>
-        <p>Os projetos do TiPCA possibilitam a participação de estudantes de diferentes localidades. As cidades apresentadas abaixo evidenciam o alcance geográfico dessa comunidade de pesquisa.</p>
-      </div>
+<section class="section" aria-labelledby="estudantes"><div class="section-header"><h2 class="section-title" id="estudantes">Estudantes de Iniciação Científica</h2><p class="section-description">Participantes atuais, organizados por projeto de pesquisa.</p></div><div class="distance-note"><strong>Pesquisa desenvolvida também a distância</strong><p>Os projetos do TiPCA possibilitam a participação de estudantes de diferentes localidades. As cidades apresentadas abaixo evidenciam o alcance geográfico dessa comunidade de pesquisa.</p></div>
+<article class="project-group"><div class="project-heading"><h3>CLP em Plataforma Aberta</h3><a class="project-link" href="https://mariaalineg.github.io/tipca-site/pesquisa/projetos/clp-plataforma-aberta/" target="_blank" rel="noopener noreferrer">Conheça o projeto →</a></div><div class="people-grid">
+<div class="person-card"><div class="person-name">Leonilson Sebastião Vicente</div><div class="person-course">Engenharia Elétrica</div><div class="person-location">📍 Fernandópolis, SP</div><div class="person-footer"><span class="year-badge">2025 · Veterano</span><a class="lattes-link" href="https://lattes.cnpq.br/0620053201274600" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
+<div class="person-card"><div class="person-name">Larissa Ferreira Eleotério</div><div class="person-course">Engenharia Elétrica</div><div class="person-location">📍 São João del-Rei, MG</div><div class="person-footer"><span class="year-badge">2026</span><a class="lattes-link" href="http://lattes.cnpq.br/6502894549362355" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
+<div class="person-card"><div class="person-name">Ester Martins Oliveira Viana</div><div class="person-course">Engenharia de Software</div><div class="person-location">📍 Ipatinga, MG</div><div class="person-footer"><span class="year-badge">2026</span></div></div>
+<div class="person-card"><div class="person-name">Claudson Luan Felis Reis</div><div class="person-course">Automação Industrial</div><div class="person-location">📍 Linhares, ES</div><div class="person-footer"><span class="year-badge">2026</span><a class="lattes-link" href="http://lattes.cnpq.br/0508158711535087" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
+<div class="person-card"><div class="person-name">Leandro Veiga Weber</div><div class="person-course">Engenharia Elétrica</div><div class="person-location">📍 Ijuí, RS</div><div class="person-footer"><span class="year-badge">2026</span><a class="lattes-link" href="https://lattes.cnpq.br/7696278668604322" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
+<div class="person-card"><div class="person-name">Arthur Freitas Cardoso</div><div class="person-course">Física</div><div class="person-location">📍 Lisboa, PT</div><div class="person-footer"><span class="year-badge">2026</span><a class="lattes-link" href="http://lattes.cnpq.br/9697096081470071" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
+</div></article>
+<article class="project-group"><div class="project-heading"><h3>Conversores CC-CC</h3><a class="project-link" href="https://mariaalineg.github.io/tipca-site/pesquisa/projetos/conversores-cc-cc/" target="_blank" rel="noopener noreferrer">Conheça o projeto →</a></div><div class="people-grid">
+<div class="person-card"><div class="person-name">Maurício Lopes Barbosa</div><div class="person-course">Engenharia Elétrica</div><div class="person-location">📍 Aracaju, SE</div><div class="person-footer"><span class="year-badge">2026</span><a class="lattes-link" href="https://lattes.cnpq.br/3621671594070441" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
+<div class="person-card"><div class="person-name">Marlon José do Carmo</div><div class="person-course">Engenharia Elétrica</div><div class="person-location">📍 Cataguases, MG</div><div class="person-footer"><span class="year-badge">2026</span><a class="lattes-link" href="http://lattes.cnpq.br/7383504674605138" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
+<div class="person-card"><div class="person-name">Renan Castro de Barros</div><div class="person-course">Engenharia da Computação</div><div class="person-location">📍 Belém, PA</div><div class="person-footer"><span class="year-badge">2025 · Veterano</span><a class="lattes-link" href="http://lattes.cnpq.br/4823240512121539" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
+<div class="person-card"><div class="person-name">Pedro Mendes da Silva Júnior</div><div class="person-course">Engenharia Elétrica</div><div class="person-location">📍 Anápolis, GO</div><div class="person-footer"><span class="year-badge">2025 · Veterano</span><a class="lattes-link" href="http://lattes.cnpq.br/4451540077909472" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
+<div class="person-card"><div class="person-name">Dunkan Daniel Teixeira Montiel</div><div class="person-course">Engenharia Elétrica</div><div class="person-location">📍 Pelotas, RS</div><div class="person-footer"><span class="year-badge">2026</span><a class="lattes-link" href="http://lattes.cnpq.br/0314368003491530" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
+</div></article></section>
 
-      <article class="project-group">
-        <div class="project-heading">
-          <h3>CLP em Plataforma Aberta</h3>
-          <a class="project-link" href="../pesquisa/projetos/clp-plataforma-aberta/">Conheça o projeto →</a>
-        </div>
-        <div class="people-grid">
-          <div class="person-card"><div class="person-name">Leonilson Sebastião Vicente</div><div class="person-course">Engenharia Elétrica</div><div class="person-location">📍 Fernandópolis, SP</div><div class="person-footer"><span class="year-badge">2025 · Veterano</span><a class="lattes-link" href="https://lattes.cnpq.br/0620053201274600" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
-          <div class="person-card"><div class="person-name">Larissa Ferreira Eleotério</div><div class="person-course">Engenharia Elétrica</div><div class="person-location">📍 São João del-Rei, MG</div><div class="person-footer"><span class="year-badge">2026</span><a class="lattes-link" href="http://lattes.cnpq.br/6502894549362355" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
-          <div class="person-card"><div class="person-name">Ester Martins Oliveira Viana</div><div class="person-course">Engenharia de Software</div><div class="person-location">📍 Ipatinga, MG</div><div class="person-footer"><span class="year-badge">2026</span></div></div>
-          <div class="person-card"><div class="person-name">Claudson Luan Felis Reis</div><div class="person-course">Automação Industrial</div><div class="person-location">📍 Linhares, ES</div><div class="person-footer"><span class="year-badge">2026</span><a class="lattes-link" href="http://lattes.cnpq.br/0508158711535087" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
-          <div class="person-card"><div class="person-name">Leandro Veiga Weber</div><div class="person-course">Engenharia Elétrica</div><div class="person-location">📍 Ijuí, RS</div><div class="person-footer"><span class="year-badge">2026</span><a class="lattes-link" href="https://lattes.cnpq.br/7696278668604322" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
-          <div class="person-card"><div class="person-name">Arthur Freitas Cardoso</div><div class="person-course">Física</div><div class="person-location">📍 Lisboa, PT</div><div class="person-footer"><span class="year-badge">2026</span><a class="lattes-link" href="http://lattes.cnpq.br/9697096081470071" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
-        </div>
-      </article>
+<section class="section" aria-labelledby="egressos"><div class="section-header"><h2 class="section-title" id="egressos">Egressos</h2><p class="section-description">Participantes de ciclos anteriores, organizados pelo projeto em que desenvolveram suas atividades.</p></div>
+<article class="project-group"><div class="project-heading"><h3>CLP em Plataforma Aberta</h3></div><div class="people-grid"><div class="person-card"><div class="person-name">Nelson Emeliano Silva</div><div class="person-course">Análise e Desenvolvimento de Sistemas</div><div class="person-location">📍 Manaus, AM</div><div class="person-footer"><span class="year-badge">Participação: 2025</span><a class="lattes-link" href="http://lattes.cnpq.br/2121965641196559" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div></div></article>
+<article class="project-group"><div class="project-heading"><h3>Conversores CC-CC</h3></div><div class="people-grid"><div class="person-card"><div class="person-name">Nirlan Neckir Zamprogno de Souza</div><div class="person-course">Engenharia de Computação</div><div class="person-location">📍 Rio de Janeiro, RJ</div><div class="person-footer"><span class="year-badge">Participação: 2024–2025</span></div></div><div class="person-card"><div class="person-name">Guilherme Manoel Carvalho dos Santos</div><div class="person-course">Engenharia de Software</div><div class="person-location">📍 Santa Rosa, RS</div><div class="person-footer"><span class="year-badge">Participação: 2024–2025</span><a class="lattes-link" href="http://lattes.cnpq.br/9215778137121310" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div></div></article>
+</section>
+<p class="note">As páginas pessoais dos pesquisadores e as páginas individuais dos projetos podem ser ampliadas progressivamente sem alteração dos endereços utilizados nesta página.</p>
+</main></body></html>
 
-      <article class="project-group">
-        <div class="project-heading">
-          <h3>Conversores CC-CC</h3>
-          <a class="project-link" href="../pesquisa/projetos/conversores-cc-cc/">Conheça o projeto →</a>
-        </div>
-        <div class="people-grid">
-          <div class="person-card"><div class="person-name">Maurício Lopes Barbosa</div><div class="person-course">Engenharia Elétrica</div><div class="person-location">📍 Aracaju, SE</div><div class="person-footer"><span class="year-badge">2026</span><a class="lattes-link" href="https://lattes.cnpq.br/3621671594070441" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
-          <div class="person-card"><div class="person-name">Marlon José do Carmo</div><div class="person-course">Engenharia Elétrica</div><div class="person-location">📍 Cataguases, MG</div><div class="person-footer"><span class="year-badge">2026</span><a class="lattes-link" href="http://lattes.cnpq.br/7383504674605138" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
-          <div class="person-card"><div class="person-name">Renan Castro de Barros</div><div class="person-course">Engenharia da Computação</div><div class="person-location">📍 Belém, PA</div><div class="person-footer"><span class="year-badge">2025 · Veterano</span><a class="lattes-link" href="http://lattes.cnpq.br/4823240512121539" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
-          <div class="person-card"><div class="person-name">Pedro Mendes da Silva Júnior</div><div class="person-course">Engenharia Elétrica</div><div class="person-location">📍 Anápolis, GO</div><div class="person-footer"><span class="year-badge">2025 · Veterano</span><a class="lattes-link" href="http://lattes.cnpq.br/4451540077909472" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
-          <div class="person-card"><div class="person-name">Dunkan Daniel Teixeira Montiel</div><div class="person-course">Engenharia Elétrica</div><div class="person-location">📍 Pelotas, RS</div><div class="person-footer"><span class="year-badge">2026</span><a class="lattes-link" href="http://lattes.cnpq.br/0314368003491530" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
-        </div>
-      </article>
-    </section>
-
-    <section class="section" aria-labelledby="egressos">
-      <div class="section-header">
-        <h2 class="section-title" id="egressos">Egressos</h2>
-        <p class="section-description">Participantes de ciclos anteriores, organizados pelo projeto em que desenvolveram suas atividades.</p>
-      </div>
-
-      <article class="project-group">
-        <div class="project-heading"><h3>CLP em Plataforma Aberta</h3></div>
-        <div class="people-grid">
-          <div class="person-card"><div class="person-name">Nelson Emeliano Silva</div><div class="person-course">Análise e Desenvolvimento de Sistemas</div><div class="person-location">📍 Manaus, AM</div><div class="person-footer"><span class="year-badge">Participação: 2025</span><a class="lattes-link" href="http://lattes.cnpq.br/2121965641196559" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
-        </div>
-      </article>
-
-      <article class="project-group">
-        <div class="project-heading"><h3>Conversores CC-CC</h3></div>
-        <div class="people-grid">
-          <div class="person-card"><div class="person-name">Nirlan Neckir Zamprogno de Souza</div><div class="person-course">Engenharia de Computação</div><div class="person-location">📍 Rio de Janeiro, RJ</div><div class="person-footer"><span class="year-badge">Participação: 2024–2025</span></div></div>
-          <div class="person-card"><div class="person-name">Guilherme Manoel Carvalho dos Santos</div><div class="person-course">Engenharia de Software</div><div class="person-location">📍 Santa Rosa, RS</div><div class="person-footer"><span class="year-badge">Participação: 2024–2025</span><a class="lattes-link" href="http://lattes.cnpq.br/9215778137121310" target="_blank" rel="noopener noreferrer">Lattes →</a></div></div>
-        </div>
-      </article>
-    </section>
-
-    <p class="note">As páginas pessoais dos pesquisadores e as páginas individuais dos projetos podem ser ampliadas progressivamente sem alteração dos endereços utilizados nesta página.</p>
-  </main>
-</body>
-</html>
